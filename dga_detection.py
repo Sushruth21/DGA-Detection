@@ -56,7 +56,7 @@ def load_settings():
 		total_bigrams_settings = float(ConfigSectionMap("Values")['total_bigrams_settings'])
 		return baseline, total_bigrams_settings
 	else:
-		print "No settings file. Please run training function."
+		print ("No settings file. Please run training function.")
 
 def load_data():
 
@@ -81,7 +81,7 @@ def load_data():
 			Config.write(cfgfile)
 			cfgfile.close()
 		except:
-			print "Settings file error. Please Delete."
+			print ("Settings file error. Please Delete.")
 			exit()
 
 		
@@ -89,7 +89,7 @@ def load_data():
 			with open('data/alexa_top_1m_domain.json', 'r') as f:
 				training_data = json.load(f)
 		else:
-			print "Downloading Alexa Top 1m Domains..."
+			print ("Downloading Alexa Top 1m Domains...")
 			training_data = alexa.top_list(1000000)
 			with open('data/alexa_top_1m_domain.json', 'w') as f:
 				json.dump(training_data, f)
@@ -100,7 +100,7 @@ def load_data():
 		for input_domain in xrange(len(training_data)): #Run through each input_domain in the training list
 			input_domain = tldextract.extract(training_data[input_domain][1])
 			if len(input_domain.domain) > 5 and "-" not in input_domain.domain:
-				print "Processing domain:", input_domain.domain #Print input_domain number in list
+				print ("Processing domain:", input_domain.domain) #Print input_domain number in list
 				for  bigram_position in xrange(len(input_domain.domain) - 1): #Run through each bigram in input_domain
 					total_bigrams = total_bigrams + 1 #Increment bigram total
 					if input_domain.domain[bigram_position:bigram_position + 2] in bigram_dict: #Check if bigram already exists in dictionary
